@@ -1,10 +1,14 @@
 package com.yaowen.playaudiotest;
 
 import android.media.MediaPlayer;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.File;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button play,pause,stop;
@@ -26,10 +30,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initMediaPlayer() {
+
+        try {
+            File file=new File(Environment.getExternalStorageDirectory(),"music.mp3");
+            mediaPlayer.setDataSource(file.getPath());
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.play:{
+                if (!mediaPlayer.isPlaying()){
+                    mediaPlayer.start();
+                }
+                break;
+            }
+            case R.id.pause:{
+                if (mediaPlayer.isPlaying()){
+                    mediaPlayer.pause();
+                }
+                break;
+            }
+            case R.id.stop:{
+                if (mediaPlayer.isPlaying()){
+                    mediaPlayer.reset();
+                    initMediaPlayer();
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer!=null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
     }
 }
