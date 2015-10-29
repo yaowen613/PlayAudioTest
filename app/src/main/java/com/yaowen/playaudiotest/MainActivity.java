@@ -11,16 +11,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button play,pause,stop;
+    private Button play, pause, stop;
     private MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        play= (Button) findViewById(R.id.play);
-        pause= (Button) findViewById(R.id.pause);
-        stop= (Button) findViewById(R.id.stop);
-        mediaPlayer=new MediaPlayer();
+        play = (Button) findViewById(R.id.play);
+        pause = (Button) findViewById(R.id.pause);
+        stop = (Button) findViewById(R.id.stop);
+        mediaPlayer = new MediaPlayer();
 
         play.setOnClickListener(this);
         pause.setOnClickListener(this);
@@ -32,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initMediaPlayer() {
 
         try {
-            File file=new File(Environment.getExternalStorageDirectory(),"music.mp3");
-            mediaPlayer.setDataSource(file.getPath());// 指定⾳频⽂件的路径
+            File file = new File(Environment.getExternalStorageDirectory(), "music.mp3");
+            mediaPlayer.setDataSource(file.getPath());// 指定⾳频⽂件的路径 sdcard目录下的music.mp3文件
             mediaPlayer.prepare();// 让MediaPlayer进⼊到准备状态
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,21 +43,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.play:{
-                if (!mediaPlayer.isPlaying()){
+        switch (v.getId()) {
+            case R.id.play: {
+                if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.start();// 开始播放
                 }
                 break;
             }
-            case R.id.pause:{
-                if (mediaPlayer.isPlaying()){
+            case R.id.pause: {
+                if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();// 暂停播放
                 }
                 break;
             }
-            case R.id.stop:{
-                if (mediaPlayer.isPlaying()){
+            case R.id.stop: {
+                if (mediaPlayer.isPlaying()) {
                     mediaPlayer.reset();// 停⽌播放
                     initMediaPlayer();
                 }
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mediaPlayer!=null){
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
         }
