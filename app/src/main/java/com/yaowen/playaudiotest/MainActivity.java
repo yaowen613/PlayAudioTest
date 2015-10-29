@@ -21,7 +21,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         play.setOnClickListener(this);
         pause.setOnClickListener(this);
         stop.setOnClickListener(this);
+        initMediaPlayer();//初始化MediaPlayer
 
+    }
+
+    private void initMediaPlayer() {
     }
 
     @Override
