@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             File file=new File(Environment.getExternalStorageDirectory(),"music.mp3");
-            mediaPlayer.setDataSource(file.getPath());
-            mediaPlayer.prepare();
+            mediaPlayer.setDataSource(file.getPath());// 指定⾳频⽂件的路径
+            mediaPlayer.prepare();// 让MediaPlayer进⼊到准备状态
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,19 +45,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.play:{
                 if (!mediaPlayer.isPlaying()){
-                    mediaPlayer.start();
+                    mediaPlayer.start();// 开始播放
                 }
                 break;
             }
             case R.id.pause:{
                 if (mediaPlayer.isPlaying()){
-                    mediaPlayer.pause();
+                    mediaPlayer.pause();// 暂停播放
                 }
                 break;
             }
             case R.id.stop:{
                 if (mediaPlayer.isPlaying()){
-                    mediaPlayer.reset();
+                    mediaPlayer.reset();// 停⽌播放
                     initMediaPlayer();
                 }
                 break;
